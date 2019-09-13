@@ -1,15 +1,29 @@
 <template>
   <div class="indicators">
     <ul class="indicators__list">
-      <li class="indicators__item indicators__item--all">12</li>
-      <li class="indicators__item indicators__item--one">3</li>
-      <li class="indicators__item indicators__item--two">5</li>
-      <li class="indicators__item indicators__item--three">4</li>
+      <li class="indicators__item indicators__item--all">{{ counterAll }}</li>
+      <li class="indicators__item indicators__item--one">{{ counterTypeOneTasks }}</li>
+      <li class="indicators__item indicators__item--two">{{ counterTypeTwoTasks }}</li>
+      <li class="indicators__item indicators__item--three">{{ counterTypeThreeTasks }}</li>
     </ul>
   </div>
 </template>
 <script>
 export default {
+  computed: {
+    counterAll () {
+      return this.$store.getters.counterAllTasks
+    },
+    counterTypeOneTasks () {
+      return this.$store.getters.counterTypeOneTasks
+    },
+    counterTypeTwoTasks () {
+      return this.$store.getters.counterTypeTwoTasks
+    },
+    counterTypeThreeTasks () {
+      return this.$store.getters.counterTypeThreeTasks
+    }
+  }
 }
 </script>
 
