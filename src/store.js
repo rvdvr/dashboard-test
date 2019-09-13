@@ -49,7 +49,30 @@ export default new Vuex.Store({
     ]
   },
   getters: {
+    counterAllTasks (state) {
+      return state.data.length
+    },
+    counterTypeOneTasks (state) {
+      const typeOneTasks = state.data.filter((item) => {
+        return item.type_id === 1
+      })
 
+      return typeOneTasks.length
+    },
+    counterTypeTwoTasks (state) {
+      const typeTwoTasks = state.data.filter((item) => {
+        return item.type_id === 2
+      })
+
+      return typeTwoTasks.length
+    },
+    counterTypeThreeTasks (state) {
+      const typeThreeTasks = state.data.filter((item) => {
+        return item.type_id === 3
+      })
+
+      return typeThreeTasks.length
+    }
   },
   mutations: {
 
