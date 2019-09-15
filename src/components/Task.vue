@@ -1,12 +1,17 @@
 <template>
   <tr class="table-body__tr">
     <td class="table-body__td">
-      <span class="table-body__require-date table-body__require-date--three">{{ task.require_date }}</span>
+      <span class="table-body__require-date table-body__require-date--one"
+        v-if="task.status_id === 1">{{ formatedRequireDate }}</span>
+      <span class="table-body__require-date table-body__require-date--two"
+        v-else-if="task.status_id === 2">{{ formatedRequireDate }}</span>
+      <span class="table-body__require-date table-body__require-date--three"
+        v-else-if="task.status_id === 3">{{ formatedRequireDate }}</span>
     </td>
     <td class="table-body__td"><p>{{ task.executor }}</p></td>
-    <td class="table-body__td"><p>Проверсти проверку</p></td>
+    <td class="table-body__td"><p>{{ writeType }}</p></td>
     <td class="table-body__td"><p>{{ task.description }}</p></td>
-    <td class="table-body__td"><p>{{ task.date_create }}</p></td>
+    <td class="table-body__td"><p>{{ formatedCreateDate }}</p></td>
   </tr>
 </template>
 
@@ -14,6 +19,20 @@
 export default {
   props: {
     task: Object
+  },
+  computed: {
+    formatedRequireDate () {
+      let date = this.task.require_date.split('-')
+      return date.reverse().join('.')
+    },
+    formatedCreateDate () {
+      let date = this.task.date_create.split('-')
+      return date.reverse().join('.')
+    },
+    writeType () {
+      let tasksType = this.$store.getters.taskTypes.find(item => item.type_id === this.task.type_id)
+      return tasksType.text
+    }
   }
 }
 </script>
