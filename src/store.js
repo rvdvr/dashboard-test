@@ -46,9 +46,30 @@ export default new Vuex.Store({
         'description': 'Контроль предписания №2',
         'date_create': '2018-03-12'
       }
-    ]
+    ],
+    taskTypes: [
+      {
+        type_id: 1,
+        text: 'Провести проверку'
+      },
+      {
+        type_id: 2,
+        text: 'Контроль предписания'
+      },
+      {
+        type_id: 3,
+        text: 'Поручение'
+      }
+    ],
+    filteredTasks: []
   },
   getters: {
+    data (state) {
+      return state.data
+    },
+    filteredTasks (state) {
+      return state.filteredTasks
+    },
     counterAllTasks (state) {
       return state.data.length
     },
@@ -72,12 +93,31 @@ export default new Vuex.Store({
       })
 
       return typeThreeTasks.length
+    },
+    taskTypes (state) {
+      return state.taskTypes
     }
   },
   mutations: {
-
+    filterTasks (state, payload) {
+      // state.filteredTasks.push.apply(payload)
+      // Array.prototype.push.apply(state.filteredTasks, payload)
+      state.filteredTasks.length = 0
+      state.filteredTasks.push(...payload)
+    }
   },
   actions: {
+    tasks: ({commit, state}, payload) => {
+      let filteredTasks
+      if (payload !== null) {
+        filteredTasks = state.data.filter(task => {
+          return task.status_id === payload
+        })
+      } else {
+        filteredTasks = state.data
+      }
 
+      commit('filterTasks', filteredTasks)
+    }
   }
 })
