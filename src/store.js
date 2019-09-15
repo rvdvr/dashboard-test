@@ -100,18 +100,16 @@ export default new Vuex.Store({
   },
   mutations: {
     filterTasks (state, payload) {
-      // state.filteredTasks.push.apply(payload)
-      // Array.prototype.push.apply(state.filteredTasks, payload)
       state.filteredTasks.length = 0
       state.filteredTasks.push(...payload)
     }
   },
   actions: {
-    tasks: ({commit, state}, payload) => {
+    tasks: ({ commit, state }, payload) => {
       let filteredTasks
       if (payload !== null) {
         filteredTasks = state.data.filter(task => {
-          return task.status_id === payload
+          return task.type_id === payload
         })
       } else {
         filteredTasks = state.data
