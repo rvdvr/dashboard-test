@@ -32,7 +32,7 @@ export default {
       if (initialState.length === 0) {
         return this.$store.getters.data
       }
-      
+
       return this.$store.getters.filteredTasks
     }
   }
@@ -71,5 +71,4 @@ export default {
     border: 1px solid rgb(204, 204, 204);
   }
 
-  
 </style>
